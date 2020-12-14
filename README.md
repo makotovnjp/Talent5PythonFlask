@@ -22,3 +22,14 @@ Tạo 1 trang web xem tuổi của bạn và của bạn gái (bạn trai) có h
 công ty HACHIX tạo 1 web hiển thị kết quả dự đoán của trí tuệ nhân tạo. 
 Tùy theo năng lực của bạn, bạn có thể nhận được thù lao từ công ty hachix
 khi tham gia dự án. 
+   
+# Thông tin tham khảo
+1. 7 lý do bạn nên chọn flask
+   - https://csc.edu.vn/lap-trinh-va-csdl/tin-tuc/kien-thuc-lap-trinh/7-ly-do-ban-nen-chon-Flask-Framework-4130
+    
+
+2. Ngũ hành xung hợp
+   - http://tuancaopro.com/tam-hop-tu-hanh-xung-la-gi/
+   
+3. Code mẫu về flask
+   - tham khảo  FlaskAPISample trong folder src
