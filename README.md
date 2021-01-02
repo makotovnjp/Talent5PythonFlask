@@ -1,4 +1,10 @@
 # Xây dựng web bằng Flask Python trong 2 tuần
+1. tạo môi trường dev
+    - conda create -n boitoan python=3.6
+    - conda activate boitoan
+    - cd src\server
+    - pip install requirements.txt
+
 
 # Tại sao dùng Flask để xây dựng web
 1. Python được sử dụng rất nhiều trong phân tích dữ liệu và trí tuệ nhân tạo.
