@@ -19,7 +19,7 @@ def boi_toan():
     elif request.method == 'GET':
         ret = _get_boi_toan(request)
 
-    return render_template("result.html", ret)
+    return render_template("result.html", ret=ret)
 
 
 # Module: function noi bo nen them _(protect), __(private)
@@ -54,12 +54,61 @@ def _post_boi_toan(req):
 def _get_boi_toan(req):
     return "OK"
 
-# Tính ngũ hành theo https://phongthuyhomang.vn/cach-tinh-thien-can-dia-chi-va-ngu-hanh-nam-sinh-cuc-nhanh/
 
+# Review1: Xem nội dung warning mà pycharm thông báo để xử lý
+# Review2: Nên dùng format function header
+# Tính ngũ hành theo https://phongthuyhomang.vn/cach-tinh-thien-can-dia-chi-va-ngu-hanh-nam-sinh-cuc-nhanh/
 def _ngu_hanh(year):
+    """
+    tính toán ngũ hành theo năm
+    :param year: (str) năm
+    :return:
+    """
+    # Review3: Nên thêm phần kiểm tra nội dung của tham số trước khi xử lý
+    # Kiểm tra type
+    # Constrast coding: code theo hợp đồng
+    # https://pagepiccinini.com/2016/03/18/contrast-coding-with-three-level-variables/#:~:text=One%20method%20to%20recode%20categorical,points%20in%20the%20data%20set.
+    if type(year) not in (str, ):
+        raise ValueError("year() is not string ".format(year))
+
+    # Chuyển dạng str của year sang int
+    # Nên thêm xử lý ngoại lệ
+    year = int(year)
+
+    # Review4: quy tắc code
+    # 1 function chỉ làm 1 nhiệm vụ
+    # KISS: keep it simple stupid
 
     # Tính thiên can và can
+    can = __tinh_thien_can(year)
 
+    # Tính địa chi và chi
+    chi = __tinh_chi(year)
+
+    # Tính giá trị hành
+    hanh = can + chi
+    if hanh > 5:
+        hanh = hanh - 5
+
+    # Review6: METADATA coding
+    hanh_mang_table = {
+        1: "KIM",
+        2: "THUY",
+        3: "HOA",
+        4: "THO",
+        5: "MOC"
+    }
+    mang = hanh_mang_table[hanh]
+
+    return mang
+
+
+def __tinh_thien_can(year):
+    """
+
+    :param year: 
+    :return: 
+    """
     thien_can = year % 10
     if thien_can == 5 or thien_can == 4:
         can = 1
@@ -72,8 +121,15 @@ def _ngu_hanh(year):
     if thien_can == 2 or thien_can == 3:
         can = 5
 
-    # Tính địa chi và chi
+    return can
 
+
+def __tinh_chi(year):
+    """
+
+    :param year:
+    :return:
+    """
     dia_chi = year % 12
     if dia_chi == 4 or dia_chi == 5 or dia_chi == 10 or dia_chi == 11:
         chi = 0
@@ -82,22 +138,8 @@ def _ngu_hanh(year):
     if dia_chi == 8 or dia_chi == 9 or dia_chi == 2 or dia_chi == 3:
         chi = 2
 
-    # Tính giá trị hành
+    return chi
 
-    hanh = can + chi
-    if hanh > 5:
-        hanh = hanh - 5
-    if hanh == 1:
-        mang = "KIM"
-    elif hanh == 2:
-        mang = "THUY"
-    elif hanh == 3:
-        mang = "HOA"
-    elif hanh == 4:
-        mang = "THO"
-    else:
-        mang = "MOC"
-    return mang
 
 def _hop_tuoi(nam, nu):
 
