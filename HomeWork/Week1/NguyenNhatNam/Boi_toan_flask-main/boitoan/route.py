@@ -23,8 +23,6 @@ def boi_toan():
     if request.method == 'POST':
         ret = _post_boi_toan(request)
         return ret
-
-
     elif request.method == 'GET':
         # ret = _get_boi_toan(request)
         return render_template('index.html')
@@ -36,6 +34,8 @@ def _post_boi_toan(req):
     # Query Parameter
     # Body (Json) {'fun': 0, 'man_year': 0, 'woman_year': 0}
     body = req.json
+    # Review2: khi mình deploy cho khách hàng nên xóa print
+    # Có thể logger của python. lúc dev dùng mode debug, lúc giao hàng cho khách thì mình dùng mode production
     print("body = {}".format(body))
 
     year_of_man = body.get("man_year")
@@ -47,17 +47,24 @@ def _post_boi_toan(req):
 
     # nhận function(ngũ hành hay xem tuổi)
     fun = body.get("fun")
-    if fun == 0: #coi ngũ hành
+    # Review1: Không nên dùng magic number
+    # ví dụ mình có thể dùng file const.py để cả 2 bên back end, front end cùng tham khao
+    if fun == 0:    # coi ngũ hành
         man_can = _ngu_hanh_can(year_of_man)
         man_chi = _ngu_hanh_chi(year_of_man)
+
         woman_can = _ngu_hanh_can(year_of_woman)
         woman_chi = _ngu_hanh_chi(year_of_woman)
+
         man_menh = _ngu_hanh(man_can, man_chi)
         woman_menh = _ngu_hanh(woman_can, woman_chi)
-        can = {'man_can_chi': man_can + " " + man_chi, 'woman_can_chi': woman_can + " " + woman_chi, 'man_menh': man_menh, 'woman_menh': woman_menh}
+
+        can = {'man_can_chi': man_can + " " + man_chi, 'woman_can_chi': woman_can + " " + woman_chi,
+               'man_menh': man_menh, 'woman_menh': woman_menh}
+
         return jsonify(can), http.HTTPStatus.OK
 
-    if fun == 1: #coi hợp tuổi
+    if fun == 1:    # coi hợp tuổi
         man = _cung_nam(year_of_man)
         woman = _cung_nu(year_of_woman)
         both = _cung_ket_hop(man, woman)
@@ -71,6 +78,7 @@ def _get_boi_toan(req):
 
 
 def _ngu_hanh_can(year):
+    # METADATA: dùng dict để xử lý
     can = year % 10
     if can == 0:
         return "Canh"
@@ -92,6 +100,7 @@ def _ngu_hanh_can(year):
         return "Mậu"
     elif can == 9:
         return "Kỷ"
+
 
 def _ngu_hanh_chi(year):
     chi = year % 100
@@ -120,6 +129,7 @@ def _ngu_hanh_chi(year):
         return "Tuất"
     elif temp == 11:
         return "Hợi"
+
 
 def _ngu_hanh(can, chi):
     if can == "Giáp" or can == "Ất":
@@ -206,9 +216,13 @@ def _cung_nu(year):#tính cung mệnh nữ
 
 
 def _cung_ket_hop(man_year,woman_year): #tính ra cung kết hơp
+    # 1 function nên để dưới 100 dòng
     man = man_year
     woman = woman_year
+
+    # Review: nên đặt tên có ý nghĩa
     temp = ""
+
     if man == "Càn":
         if woman == "Càn":
             temp = "Phục Vị"
@@ -345,6 +359,7 @@ def _cung_ket_hop(man_year,woman_year): #tính ra cung kết hơp
             temp = "Thiên Y"
         elif woman == "Đoài":
             temp = "Phục Vị"
+
     return  temp
 
 
