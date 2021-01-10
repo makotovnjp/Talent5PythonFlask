@@ -17,6 +17,7 @@
     "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-input-number": "^5.0.19",
     "react-intl": "^5.10.14",
     "react-scripts": "4.0.1",
     "react-select": "^3.1.1",

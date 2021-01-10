@@ -1,26 +1,28 @@
 // Import thu vien
-import React from 'react';
+import React, { useState} from "react";
 import ReactDom from 'react-dom';
-import DatePicker from "react-datepicker";
+import InputNumber from 'react-input-number';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: '',
+            manYear: 2000,
+            womanYear: 2000,
+            result: 'test'
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.manYearChangeHandler = this.manYearChangeHandler.bind(this);
+        this.womanYearChangeHandler = this.womanYearChangeHandler.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    manYearChangeHandler = (Year) => {
+        this.setState({manYear: Year});
     }
 
-    handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
-        event.preventDefault();
+    womanYearChangeHandler = (Year) => {
+        this.setState({womanYear: Year});
     }
 
     render() {
@@ -34,7 +36,21 @@ class App extends React.Component {
                     Nhập năm sinh âm lịch của bạn Trai và bạn Gái bên dưới.
                 </div>
 
-                <label>Năm sinh bạn Nam:</label>
+                <div>
+                    <label>Năm sinh bạn Nam:</label>
+                    <InputNumber min={1950} max={2021} step={1} value={this.state.manYear} onChange={this.manYearChangeHandler}/>
+                </div>
+                <div>
+                    <label>Năm sinh bạn Nữ:</label>
+                    <InputNumber min={1950} max={2021} step={1} value={this.state.womanYear} onChange={this.womanYearChangeHandler}/>
+                </div>
+                <div>
+                    {this.state.manYear}
+                    {this.state.womanYear}
+                    {this.state.result}
+                </div>
+
+
             </div>
         );
     }
