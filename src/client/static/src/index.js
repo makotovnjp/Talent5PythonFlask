@@ -14,7 +14,9 @@ const axios = axiosBase.create({
 
 class App extends React.Component {
     constructor(props) {
+        // props thuoc tinh
         super(props);
+        // gia tri luu o trong component
         this.state = {
             value: '',
             manYear: 2000,
@@ -35,6 +37,7 @@ class App extends React.Component {
         this.setState({womanYear: Year});
     }
 
+    // khong dong bo
     onClickXemNguHanh = async() => {
         try{
             let obj = {'man': this.state.manYear, 'woman': this.state.womanYear}
@@ -63,18 +66,17 @@ class App extends React.Component {
                     <label>Năm sinh bạn Nam:</label>
                     <InputNumber min={1950} max={2021} step={1} value={this.state.manYear} onChange={this.manYearChangeHandler}/>
                 </div>
+
                 <div>
                     <label>Năm sinh bạn Nữ:</label>
-                    <InputNumber min={1950} max={2021} step={1} value={this.state.womanYear} onChange={this.womanYearChangeHandler}/>
+                    <InputNumber min={1950} max={2030} step={1} value={this.state.womanYear} onChange={this.womanYearChangeHandler}/>
                 </div>
 
                 <button variant="primary" onClick={this.onClickXemNguHanh}>Xem Ngũ hành</button>{' '}
 
-
                 <div>
-                    {this.state.result}
+                    Ngu Hanh cua Nam:  {this.state.result}
                 </div>
-
 
             </div>
         );
