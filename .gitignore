@@ -1,3 +1,6 @@
+# Auto Files
+src/client/static/public/main.js
+src/client/static/public/node_modules_web-vitals_dist_web-vitals_es5_min_js.main.js
 .idea/*
 
 # Byte-compiled / optimized / DLL files
