@@ -2,6 +2,15 @@
 import React, { useState} from "react";
 import ReactDom from 'react-dom';
 import InputNumber from 'react-input-number';
+import axiosBase from 'axios';
+
+const apiUrl = {
+    boitoan:"/boitoan/",
+};
+
+const axios = axiosBase.create({
+    baseURL: "http://127.0.0.1:5000"
+});
 
 class App extends React.Component {
     constructor(props) {
@@ -15,6 +24,7 @@ class App extends React.Component {
 
         this.manYearChangeHandler = this.manYearChangeHandler.bind(this);
         this.womanYearChangeHandler = this.womanYearChangeHandler.bind(this);
+        this.onClickXemNguHanh = this.onClickXemNguHanh.bind(this);
     }
 
     manYearChangeHandler = (Year) => {
@@ -23,6 +33,17 @@ class App extends React.Component {
 
     womanYearChangeHandler = (Year) => {
         this.setState({womanYear: Year});
+    }
+
+    onClickXemNguHanh = async() => {
+        try{
+            let obj = {'man': this.state.manYear, 'woman': this.state.womanYear}
+            let response = await axios.post(apiUrl.boitoan, obj);
+            return response;
+        } catch (error) {
+            // Handle error
+            return error.response;
+        }
     }
 
     render() {
@@ -44,6 +65,10 @@ class App extends React.Component {
                     <label>Năm sinh bạn Nữ:</label>
                     <InputNumber min={1950} max={2021} step={1} value={this.state.womanYear} onChange={this.womanYearChangeHandler}/>
                 </div>
+
+                <button variant="primary" onClick={this.onClickXemNguHanh}>Xem Ngũ hành</button>{' '}
+
+
                 <div>
                     {this.state.manYear}
                     {this.state.womanYear}
