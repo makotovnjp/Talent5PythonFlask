@@ -1,6 +1,7 @@
 // Import thu vien
 import React from 'react';
 import ReactDom from 'react-dom';
+import DatePicker from "react-datepicker";
 
 class App extends React.Component {
     constructor(props) {
@@ -24,10 +25,16 @@ class App extends React.Component {
 
     render() {
         return (
-            <div style={{backgroundColor:'Violet', fontSize:'50px', textAlign:'center'}}>XEM NGŨ HÀNH VÀ HỢP TUỔI.
+            <div>
+                <div style={{backgroundColor:'Violet', fontSize:'50px', textAlign:'center'}}>
+                    XEM NGŨ HÀNH VÀ HỢP TUỔI.
+                </div>
+
                 <div style={{backgroundColor:'Orange', fontSize:'30px', textAlign:'center'}}>
                     Nhập năm sinh âm lịch của bạn Trai và bạn Gái bên dưới.
                 </div>
+
+                <label>Năm sinh bạn Nam:</label>
             </div>
         );
     }
