@@ -43,7 +43,8 @@ class App extends React.Component {
             let obj = {'man': this.state.manYear, 'woman': this.state.womanYear}
             let response = await axios.post(apiUrl.boitoan, obj);
             console.log(response)
-            this.setState({result: response.data})
+//            this.setState({result: response.data.toString()})
+            this.setState({result: JSON.stringify(response.data)})
             return response;
         } catch (error) {
             // Handle error
@@ -75,7 +76,7 @@ class App extends React.Component {
                 <button variant="primary" onClick={this.onClickXemNguHanh}>Xem Ngũ hành</button>{' '}
 
                 <div>
-                    Ngu Hanh cua Nam:  {this.state.result}
+                    {this.state.result}
                 </div>
 
             </div>

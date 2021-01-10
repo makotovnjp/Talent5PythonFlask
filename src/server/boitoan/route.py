@@ -30,13 +30,18 @@ def _post_boi_toan(req):
     body = req.json
     try:
         year_of_man = int(body.get("man"))
-    except:
-        raise ValueError('Not number year_of_man = {}'.format(year_of_man))
+        year_of_woman = int(body.get("woman"))
+    except Exception as ex:
+        raise ValueError('Not number {}'.format(ex))
 
     # Xem ngũ hành
     nam_mang = _ngu_hanh(year_of_man)
+    nu_mang = _ngu_hanh(year_of_woman)
 
-    return nam_mang
+    # Noi dung tra lai context, status
+    res = {'man': nam_mang, 'woman': nu_mang}
+
+    return res
 
 
 def _get_boi_toan(req):
