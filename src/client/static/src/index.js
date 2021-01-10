@@ -19,7 +19,7 @@ class App extends React.Component {
             value: '',
             manYear: 2000,
             womanYear: 2000,
-            result: 'test'
+            result: ''
         };
 
         this.manYearChangeHandler = this.manYearChangeHandler.bind(this);
@@ -39,6 +39,8 @@ class App extends React.Component {
         try{
             let obj = {'man': this.state.manYear, 'woman': this.state.womanYear}
             let response = await axios.post(apiUrl.boitoan, obj);
+            console.log(response)
+            this.setState({result: response.data})
             return response;
         } catch (error) {
             // Handle error
@@ -70,8 +72,6 @@ class App extends React.Component {
 
 
                 <div>
-                    {this.state.manYear}
-                    {this.state.womanYear}
                     {this.state.result}
                 </div>
 
